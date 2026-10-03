@@ -56,7 +56,7 @@ gemini extensions install https://github.com/rsyed94/passport-plugins
 
 The Rollout page in Passport (admins) has these snippets pre-filled with your enrollment key.
 
-- **claude.ai organization:** Organization settings → Plugins & skills, add `rsyed94/passport-plugins`, and set Passport to Required. The plugin has no top-level `bin/`, which organization sync requires.
+- **claude.ai organization:** organization sync only reads private or internal repositories, so upload the plugin instead: download [passport-plugin.zip](https://github.com/rsyed94/passport-plugins/releases/latest/download/passport-plugin.zip), then Organization settings → Plugins & skills → Add → Upload a plugin, and set Passport to Required. For a new release, open Passport there and choose Upload new version. (An organization that mirrors this repository privately can use Sync from GitHub instead.) The plugin has no top-level `bin/`, which claude.ai requires.
 - **Claude Code through MDM:** in `managed-settings.json`,
 
   ```json
@@ -108,6 +108,8 @@ In Claude Code, the plugin also adds `~/.passport/cli/bin` to the end of the ses
 ## Versions
 
 The plugin version always equals the `passport-bridge` version it installs, and the pin moves with each bridge release: run `npm run set-version -- <version>`, add a CHANGELOG entry, and run `npm test`. Agents that cache plugins by version (Claude Code, Codex) pick up the new pin on update.
+
+To release, push a tag that matches the version, such as `v0.14.0`. The Release workflow runs the tests, builds `passport-plugin.zip` (the contents of `plugins/passport`, with `.claude-plugin/plugin.json` at the zip root, as claude.ai's Upload a plugin expects), and attaches it and its SHA-256 to a GitHub release marked latest. `npm run pack:zip` builds the same zip locally into `dist/`.
 
 ## Formats
 

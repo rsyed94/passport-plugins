@@ -1,0 +1,58 @@
+name: Release
+
+# Push a tag like v0.14.0 (matching package.json) to publish passport-plugin.zip,
+# the claude.ai "Upload a plugin" zip, on the GitHub release. The release is
+# marked latest, so this URL always serves the newest zip:
+# https://github.com/rsyed94/passport-plugins/releases/latest/download/passport-plugin.zip
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Tag matches the plugin version
+        run: |
+          version=$(node -p 'require("./package.json").version')
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME doesn't match package.json version $version. Run npm run set-version first." >&2
+            exit 1
+          fi
+          echo "VERSION=$version" >>"$GITHUB_ENV"
+      - name: Tests
+        run: |
+          sudo apt-get install -y dash >/dev/null
+          npm test
+      - name: Build passport-plugin.zip
+        run: |
+          npm run pack:zip
+          (cd dist && sha256sum passport-plugin.zip >passport-plugin.zip.sha256)
+      - name: Release notes from CHANGELOG.md
+        run: |
+          awk -v v="$VERSION" '$0 == "## " v {found=1; next} /^## / && found {exit} found' CHANGELOG.md >dist/notes.md
+          test -s dist/notes.md || { echo "CHANGELOG.md has no ## $VERSION section." >&2; exit 1; }
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/passport-plugin.zip dist/passport-plugin.zip.sha256 --clobber
+            gh release edit "$GITHUB_REF_NAME" --latest
+          else
+            gh release create "$GITHUB_REF_NAME" dist/passport-plugin.zip dist/passport-plugin.zip.sha256 \
+              --title "Passport plugin $VERSION" --notes-file dist/notes.md --latest
+          fi

@@ -11,7 +11,8 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "lint": "shellcheck -s sh plugins/passport/scripts/passport-hook.sh",
-    "set-version": "node tools/set-version.mjs"
+    "set-version": "node tools/set-version.mjs",
+    "pack:zip": "node tools/pack-zip.mjs"
   },
   "devDependencies": {
     "ajv": "8.17.1"
