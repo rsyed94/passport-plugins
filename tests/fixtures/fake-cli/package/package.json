@@ -1,0 +1,12 @@
+{
+  "name": "passport-bridge",
+  "version": "0.14.0",
+  "type": "module",
+  "bin": {
+    "passport": "./dist/passport.js",
+    "passport-bridge": "./dist/cli.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0"
+  }
+}

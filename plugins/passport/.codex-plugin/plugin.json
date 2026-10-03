@@ -1,0 +1,29 @@
+{
+  "name": "passport",
+  "version": "0.14.0",
+  "description": "Connects Passport and turns on its guard for the shell commands your agent runs.",
+  "author": {
+    "name": "Passport",
+    "url": "https://passportmcp.com"
+  },
+  "homepage": "https://passportmcp.com/connect/codex",
+  "repository": "https://github.com/rsyed94/passport-plugins",
+  "license": "MIT",
+  "keywords": ["passport", "governance", "approvals", "mcp", "production"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "Passport",
+    "shortDescription": "Rules and approvals for what your agent does in production",
+    "longDescription": "Connects Passport, which holds your work app credentials and decides what agents may do. Passport records the shell commands Codex runs and blocks the ones your rules block.",
+    "developerName": "Passport",
+    "category": "Developer Tools",
+    "websiteURL": "https://passportmcp.com",
+    "privacyPolicyURL": "https://passportmcp.com/privacy",
+    "termsOfServiceURL": "https://passportmcp.com/terms",
+    "defaultPrompt": [
+      "Check what Passport would decide for railway redeploy in production."
+    ]
+  }
+}

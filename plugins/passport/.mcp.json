@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "passport": {
+      "type": "http",
+      "url": "https://passportmcp.com/mcp"
+    }
+  }
+}

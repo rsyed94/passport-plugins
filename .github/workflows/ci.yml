@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Manifests and hook script (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Lint the hook script
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y dash >/dev/null
+          npm run lint
+      - name: Install client CLIs for their validators
+        if: runner.os == 'Linux'
+        run: npm install -g @anthropic-ai/claude-code @openai/codex @google/gemini-cli
+      - name: Tests
+        run: npm test
+
+  windows:
+    name: PowerShell hook script (${{ matrix.shell }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tests
+        shell: pwsh
+        run: ./tests/windows/passport-hook.tests.ps1 -Shell ${{ matrix.shell }}

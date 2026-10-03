@@ -1,0 +1,19 @@
+{
+  "name": "passport-plugins",
+  "version": "0.14.0",
+  "private": true,
+  "description": "Development tooling for the Passport agent plugin. Not published.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "lint": "shellcheck -s sh plugins/passport/scripts/passport-hook.sh",
+    "set-version": "node tools/set-version.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1"
+  }
+}

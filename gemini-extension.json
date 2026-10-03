@@ -1,0 +1,11 @@
+{
+  "name": "passport",
+  "version": "0.14.0",
+  "description": "Connects Passport: one sign-in for your work apps, with rules that decide what agents may do.",
+  "mcpServers": {
+    "passport": {
+      "httpUrl": "https://passportmcp.com/mcp"
+    }
+  },
+  "contextFileName": "plugins/passport/skills/passport/SKILL.md"
+}

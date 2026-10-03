@@ -1,0 +1,17 @@
+{
+  "name": "passport-plugins",
+  "owner": {
+    "name": "Passport",
+    "url": "https://passportmcp.com"
+  },
+  "description": "Passport for coding agents: one sign-in for your work apps, with rules that decide what agents may do.",
+  "plugins": [
+    {
+      "name": "passport",
+      "source": "./plugins/passport",
+      "description": "Connects Passport and turns on its guard for the shell commands your agent runs.",
+      "category": "security",
+      "tags": ["governance", "approvals", "mcp", "production"]
+    }
+  ]
+}

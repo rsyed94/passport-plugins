@@ -1,0 +1,25 @@
+{
+  "name": "passport",
+  "displayName": "Passport",
+  "version": "0.14.0",
+  "description": "Connects Passport and turns on its guard for the shell commands your agent runs.",
+  "author": {
+    "name": "Passport"
+  },
+  "homepage": "https://passportmcp.com/connect/cursor",
+  "repository": "https://github.com/rsyed94/passport-plugins",
+  "license": "MIT",
+  "keywords": [
+    "passport",
+    "governance",
+    "approvals",
+    "mcp",
+    "production"
+  ],
+  "hooks": "./hooks/cursor-hooks.json",
+  "mcpServers": {
+    "passport": {
+      "url": "https://passportmcp.com/mcp"
+    }
+  }
+}

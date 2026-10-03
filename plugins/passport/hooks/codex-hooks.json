@@ -1,0 +1,44 @@
+{
+  "description": "Passport guard before each shell command, audit after it, and a one-time background install of the Passport CLI. Each hook is a silent no-op until the CLI is installed.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${PLUGIN_ROOT}/scripts/passport-hook.sh\" session-start codex",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}\\scripts\\passport-hook.ps1\" session-start codex",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${PLUGIN_ROOT}/scripts/passport-hook.sh\" guard codex",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}\\scripts\\passport-hook.ps1\" guard codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${PLUGIN_ROOT}/scripts/passport-hook.sh\" audit codex",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}\\scripts\\passport-hook.ps1\" audit codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
