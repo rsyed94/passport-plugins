@@ -61,7 +61,12 @@ export function sandbox({ node = true, npm = false } = {}) {
       return existsSync(env.FAKE_NPM_LOG) ? readFileSync(env.FAKE_NPM_LOG, "utf8").trim().split("\n").filter(Boolean) : [];
     },
     cleanup() {
-      rmSync(dir, { recursive: true, force: true });
+      // A background install may still be finishing; let it release its lock.
+      const lock = join(env.PASSPORT_HOME, "cli", ".plugin-install.lock");
+      const end = Date.now() + 15_000;
+      while (existsSync(lock) && Date.now() < end) spawnSync("sleep", ["0.1"]);
+      spawnSync("sleep", ["0.2"]);
+      rmSync(dir, { recursive: true, force: true, maxRetries: 20, retryDelay: 100 });
     }
   };
 }
