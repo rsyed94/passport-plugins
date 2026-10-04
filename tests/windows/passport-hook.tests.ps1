@@ -50,10 +50,10 @@ function Invoke-HookScript($box, [string[]]$hookArgs, [string]$stdin = '', [hash
 }
 
 function Install-Pinned($box) {
-  $target = Join-Path $box.Env.PASSPORT_HOME 'cli\0.16.0'
+  $target = Join-Path $box.Env.PASSPORT_HOME 'cli\0.16.2'
   New-Item -ItemType Directory -Force -Path $target | Out-Null
   Copy-Item -Recurse -Force (Join-Path $fixtures 'fake-cli\package\*') $target
-  Set-Content -Path (Join-Path $target '.passport-install.json') -Value '{"version":"0.16.0","installedAt":1}' -Encoding ASCII
+  Set-Content -Path (Join-Path $target '.passport-install.json') -Value '{"version":"0.16.2","installedAt":1}' -Encoding ASCII
 }
 
 function Check([string]$name, [scriptblock]$body) {
@@ -101,7 +101,7 @@ Check 'session-start installs the pinned CLI once in the background' {
   $watch = [Diagnostics.Stopwatch]::StartNew()
   $r = Invoke-HookScript $box @('session-start', 'codex')
   Assert ($r.Status -eq 0 -and $r.Out -eq '') "stdout: $($r.Out)"
-  $marker = Join-Path $box.Env.PASSPORT_HOME 'cli\0.16.0\.passport-install.json'
+  $marker = Join-Path $box.Env.PASSPORT_HOME 'cli\0.16.2\.passport-install.json'
   $shim = Join-Path $box.Env.PASSPORT_HOME 'cli\bin\passport.cmd'
   $lock = Join-Path $box.Env.PASSPORT_HOME 'cli\.plugin-install.lock'
   $log = Join-Path $box.Env.PASSPORT_HOME 'logs\plugin-install.log'

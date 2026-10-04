@@ -1,6 +1,6 @@
 {
   "name": "passport",
-  "version": "0.16.0",
+  "version": "0.16.2",
   "description": "Connects Passport: one sign-in for your work apps, with rules that decide what agents may do.",
   "mcpServers": {
     "passport": {

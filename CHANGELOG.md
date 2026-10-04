@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.2
+
+- Installs `passport-bridge@0.16.2`: setup ignores keys pressed before a question appears, key moves need an explicit yes and remove only the credential (project links, profiles, and other settings stay), and commands say so when Passport can't be reached instead of exiting silently.
+
 ## 0.16.0
 
 - Installs `passport-bridge@0.16.0`: undo for deletes Passport backed up, environment detection from each tool's project link, and Production approvers.
