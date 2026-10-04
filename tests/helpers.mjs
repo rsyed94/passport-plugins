@@ -11,7 +11,7 @@ export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 export const PLUGIN = join(ROOT, "plugins", "passport");
 export const HOOK_SH = join(PLUGIN, "scripts", "passport-hook.sh");
 export const FIXTURES = join(ROOT, "tests", "fixtures");
-export const PIN = "0.15.0";
+export const PIN = "0.16.0";
 /** Versions just above and below the pin, for "newer" and "older" installs. */
 export const NEWER = PIN.replace(/\.(\d+)\.\d+$/, (_, minor) => `.${Number(minor) + 1}.0`);
 export const NEWER_PATCH = PIN.replace(/\d+$/, (patch) => String(Number(patch) + 1));

@@ -40,6 +40,8 @@ Passport can hold the keys for some CLIs. A key moved into Passport is no longer
 
 - Run `passport rules test "<command>"` to see what Passport would decide and why, before running anything that changes or deletes production data.
 - `passport status` shows the current rules and whether this computer is signed in.
+- `passport env` shows where this folder's commands go (Production, Staging, or Development) and how Passport knows.
+- Passport backs up many deletes first. If one went wrong, tell the person; `passport undo --last` (or the `passport_undo` tool) restores it, and asks first in Production.
 - Read-only checks (`--help`, `--dry-run`, listing, logs) never ask.
 
 ## If `passport` isn't found

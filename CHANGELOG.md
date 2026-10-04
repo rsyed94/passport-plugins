@@ -2,6 +2,11 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.0
+
+- Installs `passport-bridge@0.16.0`: undo for deletes Passport backed up, environment detection from each tool's project link, and Production approvers.
+- The `passport` skill mentions `passport env` and `passport undo`.
+
 ## 0.15.0
 
 - Installs `passport-bridge@0.15.0`: everyday commands in the project run without asking, keys held by Passport, and `passport exec`.
