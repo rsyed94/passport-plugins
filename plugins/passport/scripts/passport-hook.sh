@@ -61,7 +61,9 @@ find_node() {
     IFS=$old_ifs
     [ -n "$dir" ] || continue
     candidate=$dir/node
-    [ -x "$candidate" ] && [ ! -d "$candidate" ] || continue
+    if [ ! -x "$candidate" ] || [ -d "$candidate" ]; then
+      continue
+    fi
     is_ephemeral "$candidate" && continue
     major=$(node_major "$candidate")
     if [ -n "$major" ] && [ "$major" -ge "$MIN_NODE_MAJOR" ]; then
@@ -110,7 +112,9 @@ path_passport() {
     IFS=$old_ifs
     [ -n "$dir" ] || continue
     candidate=$dir/passport
-    [ -x "$candidate" ] && [ ! -d "$candidate" ] || continue
+    if [ ! -x "$candidate" ] || [ -d "$candidate" ]; then
+      continue
+    fi
     is_ephemeral "$candidate" && continue
     printf '%s\n' "$candidate"
     return 0

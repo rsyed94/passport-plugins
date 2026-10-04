@@ -102,10 +102,16 @@ Check 'session-start installs the pinned CLI once in the background' {
   $r = Invoke-HookScript $box @('session-start', 'codex')
   Assert ($r.Status -eq 0 -and $r.Out -eq '') "stdout: $($r.Out)"
   $marker = Join-Path $box.Env.PASSPORT_HOME 'cli\0.14.0\.passport-install.json'
+  $shim = Join-Path $box.Env.PASSPORT_HOME 'cli\bin\passport.cmd'
+  $lock = Join-Path $box.Env.PASSPORT_HOME 'cli\.plugin-install.lock'
+  $log = Join-Path $box.Env.PASSPORT_HOME 'logs\plugin-install.log'
+  # The copy lands before the shims are written and the lock is released, so
+  # wait for the whole install, not just the marker.
   $deadline = (Get-Date).AddSeconds(60)
-  while (-not (Test-Path $marker) -and (Get-Date) -lt $deadline) { Start-Sleep -Milliseconds 250 }
-  Assert (Test-Path $marker) 'install finished'
-  Assert (Test-Path (Join-Path $box.Env.PASSPORT_HOME 'cli\bin\passport.cmd')) 'shim written'
+  while (-not ((Test-Path $marker) -and (Test-Path $shim) -and -not (Test-Path $lock)) -and (Get-Date) -lt $deadline) { Start-Sleep -Milliseconds 250 }
+  $logText = if (Test-Path $log) { (Get-Content -Raw $log) } else { '(no log)' }
+  Assert (Test-Path $marker) "install finished. Log: $logText"
+  Assert (Test-Path $shim) "shim written. Log: $logText"
   Start-Sleep -Seconds 2
   $packs = @(Get-Content $box.Env.FAKE_NPM_LOG | Where-Object { $_ -like 'pack *' }).Count
   $null = Invoke-HookScript $box @('session-start', 'codex')
