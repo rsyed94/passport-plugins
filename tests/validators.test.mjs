@@ -7,7 +7,7 @@ import { mkdirSync, mkdtempSync, realpathSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
-import { PLUGIN, ROOT } from "./helpers.mjs";
+import { PIN, PLUGIN, ROOT } from "./helpers.mjs";
 
 const has = (bin) => spawnSync("sh", ["-c", `command -v ${bin}`]).status === 0;
 
@@ -70,7 +70,7 @@ test("codex: adds the marketplace and installs the plugin", { skip: !has("codex"
     assert.equal(run("codex", ["plugin", "marketplace", "add", ROOT], box.env).status, 0);
     const add = run("codex", ["plugin", "add", "passport@passport-plugins"], box.env);
     assert.equal(add.status, 0, add.output);
-    assert.match(run("codex", ["plugin", "list"], box.env).output, /passport@passport-plugins\s+installed, enabled\s+0\.14\.0/);
+    assert.match(run("codex", ["plugin", "list"], box.env).output, new RegExp(`passport@passport-plugins\\s+installed, enabled\\s+${PIN.replaceAll(".", "\\.")}`));
     assert.match(run("codex", ["mcp", "list"], box.env).output, /passport\s+https:\/\/passportmcp\.com\/mcp/);
   } finally {
     box.cleanup();

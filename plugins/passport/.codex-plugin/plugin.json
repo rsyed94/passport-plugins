@@ -1,6 +1,6 @@
 {
   "name": "passport",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Connects Passport and turns on its guard for the shell commands your agent runs.",
   "author": {
     "name": "Passport",
@@ -9,7 +9,13 @@
   "homepage": "https://passportmcp.com/connect/codex",
   "repository": "https://github.com/rsyed94/passport-plugins",
   "license": "MIT",
-  "keywords": ["passport", "governance", "approvals", "mcp", "production"],
+  "keywords": [
+    "passport",
+    "governance",
+    "approvals",
+    "mcp",
+    "production"
+  ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "hooks": "./hooks/codex-hooks.json",

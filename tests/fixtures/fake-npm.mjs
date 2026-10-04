@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 const args = process.argv.slice(2);
 if (process.env.FAKE_NPM_LOG) appendFileSync(process.env.FAKE_NPM_LOG, `${args.join(" ")}\n`);
 if (args[0] === "pack") {
-  execFileSync("tar", ["-czf", "passport-bridge-0.14.0.tgz", "-C", process.env.FAKE_NPM_PACKAGE, "package"]);
+  execFileSync("tar", ["-czf", "passport-bridge-0.15.0.tgz", "-C", process.env.FAKE_NPM_PACKAGE, "package"]);
 } else if (args[0] === "ci" || args[0] === "install") {
   mkdirSync("node_modules/@modelcontextprotocol/sdk", { recursive: true });
   writeFileSync("node_modules/@modelcontextprotocol/sdk/package.json", '{"name":"@modelcontextprotocol/sdk"}');

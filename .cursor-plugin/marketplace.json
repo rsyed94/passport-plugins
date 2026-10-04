@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Passport for coding agents: one sign-in for your work apps, with rules that decide what agents may do.",
-    "version": "0.14.0"
+    "version": "0.15.0"
   },
   "plugins": [
     {

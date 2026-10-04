@@ -8,6 +8,9 @@ import {
   CLAUDE_PRE,
   CODEX_PRE,
   CURSOR_BEFORE,
+  NEWER,
+  NEWER_PATCH,
+  OLDER,
   PIN,
   SHELLS,
   installPinned,
@@ -82,10 +85,10 @@ for (const shell of SHELLS) {
       "the `passport init` shim wins over the pinned copy",
       withBox({}, (box) => {
         installPinned(box);
-        const newer = installPinned(box, "0.15.0");
+        const newer = installPinned(box, NEWER);
         writeShim(box, join(newer, "dist", "passport.js"));
         runHook(box, ["guard", "claude-code"], { input: CLAUDE_PRE, shell });
-        assert.match(box.calls()[0].entry, /\/cli\/0\.15\.0\/dist\/passport\.js$/);
+        assert.match(box.calls()[0].entry, new RegExp(`/cli/${NEWER.replaceAll(".", "\\.")}/dist/passport\\.js$`));
       })
     );
 
@@ -276,9 +279,9 @@ describe("session-start: ensure the CLI", () => {
 
       const npm = box.npmCalls();
       assert.equal(npm.filter((line) => line.startsWith("pack ")).length, 1);
-      assert.match(npm[0], /^pack passport-bridge@0\.14\.0 /);
+      assert.match(npm[0], new RegExp(`^pack passport-bridge@${PIN.replaceAll(".", "\\.")} `));
       assert.ok(npm.some((line) => line.startsWith("ci --omit=dev --ignore-scripts")));
-      assert.match(readFileSync(box.logFile, "utf8"), /Installed passport-bridge@0\.14\.0/);
+      assert.match(readFileSync(box.logFile, "utf8"), new RegExp(`Installed passport-bridge@${PIN.replaceAll(".", "\\.")}`));
 
       // Ran once: later sessions see the install and start nothing.
       const again = runHook(box, ["session-start", "codex"]);
@@ -310,7 +313,7 @@ describe("session-start: ensure the CLI", () => {
   test(
     "does nothing when a usable CLI is already installed",
     withBox({ npm: true }, async (box) => {
-      const newer = installPinned(box, "0.15.0");
+      const newer = installPinned(box, NEWER);
       writeShim(box, join(newer, "dist", "passport.js"));
       const result = runHook(box, ["session-start", "cursor"]);
       assert.deepEqual([result.status, result.stdout], [0, ""]);
@@ -326,7 +329,7 @@ describe("session-start: ensure the CLI", () => {
       const prefix = join(box.dir, "global");
       const pkg = join(prefix, "lib", "node_modules", "passport-bridge");
       mkdirSync(join(pkg, "dist"), { recursive: true });
-      writeFileSync(join(pkg, "package.json"), JSON.stringify({ name: "passport-bridge", version: "0.15.1" }, null, 2));
+      writeFileSync(join(pkg, "package.json"), JSON.stringify({ name: "passport-bridge", version: NEWER_PATCH }, null, 2));
       writeFileSync(join(pkg, "dist", "passport.js"), "");
       mkdirSync(join(prefix, "bin"), { recursive: true });
       const { symlinkSync } = await import("node:fs");
@@ -339,7 +342,7 @@ describe("session-start: ensure the CLI", () => {
       assert.equal(box.npmCalls().length, 0);
 
       // An older global install doesn't count: the pinned copy is installed.
-      writeFileSync(join(pkg, "package.json"), JSON.stringify({ name: "passport-bridge", version: "0.13.2" }, null, 2));
+      writeFileSync(join(pkg, "package.json"), JSON.stringify({ name: "passport-bridge", version: OLDER }, null, 2));
       runHook(box, ["session-start", "claude-code"], { env });
       assert.ok(await waitFor(() => existsSync(join(box.cliRoot, PIN, ".passport-install.json"))));
     })
@@ -376,7 +379,7 @@ describe("session-start: ensure the CLI", () => {
       assert.ok(await waitFor(() => existsSync(join(box.cliRoot, ".plugin-install-failed"))));
       assert.ok(await waitFor(() => !existsSync(join(box.cliRoot, ".plugin-install.lock"))));
       const log = readFileSync(box.logFile, "utf8");
-      assert.match(log, /Couldn't install passport-bridge@0\.14\.0/);
+      assert.match(log, new RegExp(`Couldn\'t install passport-bridge@${PIN.replaceAll(".", "\\.")}`));
       assert.doesNotMatch(log, /secret-value/);
       assert.equal(existsSync(join(box.cliRoot, PIN)), false, "no half-installed copy");
 

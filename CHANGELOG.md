@@ -2,6 +2,12 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.15.0
+
+- Installs `passport-bridge@0.15.0`: everyday commands in the project run without asking, keys held by Passport, and `passport exec`.
+- The `passport` skill covers `passport exec` for vendor CLIs, the production toolkit tools, exit codes, and cloud agents.
+- `npm run set-version` also moves the test fixtures, so the tests follow the pin.
+
 ## 0.14.0
 
 First release.

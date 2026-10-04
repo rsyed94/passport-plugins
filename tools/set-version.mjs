@@ -39,5 +39,16 @@ json(".cursor-plugin/marketplace.json", (data) => (data.metadata.version = versi
 json("gemini-extension.json", (data) => (data.version = version));
 text(`${P}/scripts/passport-hook.sh`, /PASSPORT_CLI_VERSION="[^"]+"/, `PASSPORT_CLI_VERSION="${version}"`);
 text(`${P}/scripts/passport-hook.ps1`, /\$PassportCliVersion = '[^']+'/, `$PassportCliVersion = '${version}'`);
+// Test fixtures stand in for the pinned CLI, so they carry the same version.
+const fake = "tests/fixtures/fake-cli/package";
+json(`${fake}/package.json`, (data) => (data.version = version));
+json(`${fake}/npm-shrinkwrap.json`, (data) => {
+  data.version = version;
+  if (data.packages?.[""]) data.packages[""].version = version;
+});
+text("tests/helpers.mjs", /export const PIN = "[^"]+";/, `export const PIN = "${version}";`);
+text("tests/fixtures/fake-npm.sh", /passport-bridge-\d+\.\d+\.\d+\.tgz/g, `passport-bridge-${version}.tgz`);
+text("tests/fixtures/fake-npm.mjs", /passport-bridge-\d+\.\d+\.\d+\.tgz/g, `passport-bridge-${version}.tgz`);
+text("tests/windows/passport-hook.tests.ps1", /\d+\.\d+\.\d+(?=['"\\])/g, version);
 text("README.md", /passport-bridge@\d+\.\d+\.\d+/g, `passport-bridge@${version}`);
 console.log(`Set the plugin and CLI pin to ${version}. Add a CHANGELOG.md entry, then run npm test.`);
