@@ -6,6 +6,10 @@ The plugin version always equals the `passport-bridge` version it installs.
 
 - Installs `passport-bridge@0.16.4`: agent hooks reuse a short-lived access token between runs instead of exchanging one on every command, so activity reports reach Passport within the hook's time budget. Includes MCP SDK 1.32.1.
 
+## 0.16.4
+
+- Installs `passport-bridge@0.16.4`. Since 0.16.2: Codex commands like project scripts and test runners are now checked, hooks run through a stable launcher that upgrades update, sessions record the program name for commands Passport can't check, and the guard stays fast when Passport is unreachable.
+
 ## 0.16.2
 
 - Installs `passport-bridge@0.16.2`: setup ignores keys pressed before a question appears, key moves need an explicit yes and remove only the credential (project links, profiles, and other settings stay), and commands say so when Passport can't be reached instead of exiting silently.
