@@ -13,7 +13,7 @@
 
 - **Sign-in:** the first time the agent uses Passport, its own sign-in opens Passport in your browser, where you pick the workspace. No token is stored in the plugin.
 - **Guard and audit:** each shell command goes to the Passport CLI's `passport hook guard` before it runs and `passport hook` after. The CLI decides; the plugin only passes the agent's input through and returns the CLI's answer. Codex can't show Passport's prompt, so there Passport records and blocks, and Codex's own approvals cover the rest.
-- **CLI install:** on the first session, if no Passport CLI is installed, the plugin installs `passport-bridge@0.16.2` into `~/.passport/cli/<version>/` in the background with npm (Node.js 20 or newer), the same layout `passport init` uses. It runs once, never blocks the session, and never prints into it. Progress and problems go to `~/.passport/logs/plugin-install.log`. Until it finishes, the hooks do nothing and the app connection already works.
+- **CLI install:** on the first session, if no Passport CLI is installed, the plugin installs `passport-bridge@0.16.4` into `~/.passport/cli/<version>/` in the background with npm (Node.js 20 or newer), the same layout `passport init` uses. It runs once, never blocks the session, and never prints into it. Progress and problems go to `~/.passport/logs/plugin-install.log`. Until it finishes, the hooks do nothing and the app connection already works.
 - To finish setup for your terminal (Autopilot presets, apps, environments), run `npx passport-bridge@latest init`.
 
 ## Install
