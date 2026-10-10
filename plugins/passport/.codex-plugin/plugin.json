@@ -1,6 +1,6 @@
 {
   "name": "passport",
-  "version": "0.16.4",
+  "version": "0.16.6",
   "description": "Connects Passport and turns on its guard for the shell commands your agent runs.",
   "author": {
     "name": "Passport",

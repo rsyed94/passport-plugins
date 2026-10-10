@@ -14,7 +14,7 @@
 # same layout `passport init` uses) and return at once. Never prints anything.
 # Progress and problems go to ~/.passport/logs/plugin-install.log.
 
-PASSPORT_CLI_VERSION="0.16.4"
+PASSPORT_CLI_VERSION="0.16.6"
 MIN_NODE_MAJOR=20
 
 mode=${1:-}
@@ -138,16 +138,17 @@ global_cli_current() {
   [ -n "$found" ] && version_at_least "$found" "$PASSPORT_CLI_VERSION"
 }
 
-# Sets CLI_NODE + CLI_ENTRY, or CLI_BIN. Preference: the `passport init` shim
-# (the person's chosen version), a `current` link, the plugin's pinned copy,
+# Sets CLI_NODE + CLI_ENTRY, or CLI_BIN. Preference: the `passport init`
+# launcher (the person's chosen version, with its fast path), a `current` link, the plugin's pinned copy,
 # then a `passport` on PATH.
 resolve_cli() {
   CLI_NODE=
   CLI_ENTRY=
   CLI_BIN=
   if shim_valid; then
-    CLI_NODE=$sn
-    CLI_ENTRY=$se
+    # Run the launcher itself: it answers plain reads without starting Node
+    # and always points at the version the person installed.
+    CLI_BIN=$CLI_ROOT/bin/passport
     return 0
   fi
   for dir in "$CLI_ROOT/current" "$PIN_DIR"; do

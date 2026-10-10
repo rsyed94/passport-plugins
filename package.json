@@ -1,6 +1,6 @@
 {
   "name": "passport-plugins",
-  "version": "0.16.4",
+  "version": "0.16.6",
   "private": true,
   "description": "Development tooling for the Passport agent plugin. Not published.",
   "license": "MIT",

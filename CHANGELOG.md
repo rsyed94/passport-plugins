@@ -2,6 +2,11 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.6
+
+- Installs `passport-bridge@0.16.6`: faster guard (plain reads answered without starting Node), guard health and coverage, and Ask becomes Block in Codex with a note on how to approve.
+- The plugin's hooks now run the `passport` launcher itself, so they get the same fast path as hooks `passport init` installs.
+
 ## 0.16.4
 
 - Installs `passport-bridge@0.16.4`: agent hooks reuse a short-lived access token between runs instead of exchanging one on every command, so activity reports reach Passport within the hook's time budget. Includes MCP SDK 1.32.1.
