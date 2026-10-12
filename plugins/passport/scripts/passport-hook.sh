@@ -14,7 +14,7 @@
 # same layout `passport init` uses) and return at once. Never prints anything.
 # Progress and problems go to ~/.passport/logs/plugin-install.log.
 
-PASSPORT_CLI_VERSION="0.16.6"
+PASSPORT_CLI_VERSION="0.16.8"
 MIN_NODE_MAJOR=20
 
 mode=${1:-}

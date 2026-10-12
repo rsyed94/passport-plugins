@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.8
+
+- Installs `passport-bridge@0.16.8`: guard health and coverage, locked hooks for managed rollouts, script reading (shell scripts, make targets, npm scripts), project scripts, and the agent/computer/key wording used across Passport.
+
 ## 0.16.6
 
 - Installs `passport-bridge@0.16.6`: faster guard (plain reads answered without starting Node), guard health and coverage, and Ask becomes Block in Codex with a note on how to approve.
