@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.12
+
+- Installs `passport-bridge@0.16.12`: "Did you mean" for typos, help that starts with examples, one question style, clearer wording, and background report sending that always finishes within a few seconds, one at a time.
+
 ## 0.16.10
 
 - Installs `passport-bridge@0.16.10`: a clearer CLI that fits any terminal width, `init` that shows its plan before changing anything, a one-screen `passport status`, live approval waiting, vendor CLIs that keep working after their key moves into Passport, secrets hidden from agent output, and one sign-in flow.

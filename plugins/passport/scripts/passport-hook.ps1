@@ -11,7 +11,7 @@
 param([string]$Mode = '', [string]$Client = 'claude-code')
 
 $ErrorActionPreference = 'Stop'
-$PassportCliVersion = '0.16.10'
+$PassportCliVersion = '0.16.12'
 $MinNodeMajor = 20
 
 if ($Client -notin @('claude-code', 'codex', 'cursor')) { exit 0 }
