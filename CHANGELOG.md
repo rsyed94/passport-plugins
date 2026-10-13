@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.10
+
+- Installs `passport-bridge@0.16.10`: a clearer CLI that fits any terminal width, `init` that shows its plan before changing anything, a one-screen `passport status`, live approval waiting, vendor CLIs that keep working after their key moves into Passport, secrets hidden from agent output, and one sign-in flow.
+
 ## 0.16.8
 
 - Installs `passport-bridge@0.16.8`: guard health and coverage, locked hooks for managed rollouts, script reading (shell scripts, make targets, npm scripts), project scripts, and the agent/computer/key wording used across Passport.
