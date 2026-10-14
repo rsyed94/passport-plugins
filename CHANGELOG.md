@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.16.14
+
+- Installs `passport-bridge@0.16.14`: CLI output that wraps cleanly at any width, one way to show commands to run, clearer help and errors, and fixes for `setup list`, `wait`, and `login`.
+
 ## 0.16.13
 
 - Installs `passport-bridge@0.16.13`: when Passport can't be reached, every environment now asks by default and never loosens a team rule; app access applies to CLI commands too; blocked actions name their cause.
