@@ -2,6 +2,14 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.19.0
+
+- Installs `passport-bridge@0.19.0`. Approvals continue from your phone:
+  - When a rule asks and nobody is at the keyboard, the guard waits briefly for a decision; approve it in Passport and the agent's command runs with no retry.
+  - `passport wait` waits until someone decides or the request expires, and says who approved it, the person's note on a decline, or when it expired.
+  - A retry that only differs in quoting or a trailing pipe matches the same request.
+  - Older guards get a one-line notice to run `passport hook install --apply`.
+
 ## 0.18.0
 
 - Installs `passport-bridge@0.18.0`. Since 0.16.14:
