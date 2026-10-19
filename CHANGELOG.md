@@ -2,6 +2,13 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.21.0
+
+- Installs `passport-bridge@0.21.0`. Sessions are organized by project:
+  - The guard reports each session's project (the repo name, so worktrees join their repo) and branch, read locally from git.
+  - Sessions groups running sessions by project, and Home shows one row per project.
+  - `passport sessions` groups running sessions the same way.
+
 ## 0.20.0
 
 - Installs `passport-bridge@0.20.0`. One policy decision on every surface:
