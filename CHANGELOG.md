@@ -2,6 +2,14 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.20.0
+
+- Installs `passport-bridge@0.20.0`. One policy decision on every surface:
+  - The guard, `passport exec`, the gateway, and Rules › Test all decide the same way, in one order: app access first, then exceptions, team rules, and your preset.
+  - Rules › Test shows when app access decided, with a **See access** link to the app's Access tab.
+  - Force pushes (`git push --force`, `-f`, `--delete`, `--mirror`) are reported as Irreversible, and Activity names the exact form.
+  - `passport exec` with an agent token is held to both the agent's access and its owner's access.
+
 ## 0.19.0
 
 - Installs `passport-bridge@0.19.0`. Approvals continue from your phone:
