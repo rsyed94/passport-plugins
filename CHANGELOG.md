@@ -2,6 +2,13 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.22.0
+
+- Installs `passport-bridge@0.22.0`:
+  - Commands Passport doesn't recognize show their real subcommand (or "command not recognized") instead of a made-up "invoke".
+  - The speed line says how long Passport adds per action.
+  - Agents' last-used time includes guard activity, so a busy agent is never flagged as idle.
+
 ## 0.21.0
 
 - Installs `passport-bridge@0.21.0`. Sessions are organized by project:
