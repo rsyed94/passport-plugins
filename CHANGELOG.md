@@ -2,6 +2,14 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.24.0
+
+- Installs `passport-bridge@0.24.0`. Sessions read like work, and keys stay in Passport:
+  - Sessions group into work items (branch or PR) with a Production changes ledger; `passport sessions` matches.
+  - Optional step descriptions and per-session token totals, redacted on the computer before anything is sent.
+  - CLI keys stay in Passport: logins are intercepted and moved back with consent.
+  - Each risky action reports its safety outcome, and scans also check Composer's `auth.json` for tokens.
+
 ## 0.22.0
 
 - Installs `passport-bridge@0.22.0`:
