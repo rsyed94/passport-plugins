@@ -79,7 +79,7 @@ test("all three marketplaces list the one plugin at the same path", () => {
   }
 });
 
-/** event → [matcher, mode] for each client's hooks file. */
+/** event → [matcher, mode, timeout] per handler, for each client's hooks file. */
 function hookTable(hooks, client) {
   const table = {};
   for (const [event, entries] of Object.entries(hooks.hooks)) {
@@ -89,7 +89,7 @@ function hookTable(hooks, client) {
         const match = /passport-hook\.sh"? (guard|audit|session-start) ([a-z-]+)$/.exec(handler.command);
         assert.ok(match, `${event}: ${handler.command}`);
         assert.equal(match[2], client, `${event} names its client`);
-        table[event] = [entry.matcher ?? null, match[1], handler.timeout];
+        (table[event] ??= []).push([entry.matcher ?? null, match[1], handler.timeout]);
       }
     }
   }
@@ -98,20 +98,24 @@ function hookTable(hooks, client) {
 
 test("hook events and matchers mirror `passport hook install` (bridge/src/cliHookInstall.ts)", () => {
   assert.deepEqual(hookTable(read(`${P}/hooks/hooks.json`), "claude-code"), {
-    SessionStart: [null, "session-start", 10],
-    PreToolUse: ["Bash", "guard", 5],
-    PostToolUse: ["Bash", "audit", 5],
-    PostToolUseFailure: ["Bash", "audit", 5]
+    SessionStart: [
+      [null, "session-start", 10],
+      [null, "audit", 5]
+    ],
+    UserPromptSubmit: [[null, "audit", 5]],
+    PreToolUse: [["Bash", "guard", 5]],
+    PostToolUse: [["Bash", "audit", 5]],
+    PostToolUseFailure: [["Bash", "audit", 5]]
   });
   assert.deepEqual(hookTable(read(`${P}/hooks/codex-hooks.json`), "codex"), {
-    SessionStart: ["startup|resume", "session-start", 10],
-    PreToolUse: ["Bash", "guard", 5],
-    PostToolUse: ["Bash", "audit", 5]
+    SessionStart: [["startup|resume", "session-start", 10]],
+    PreToolUse: [["Bash", "guard", 5]],
+    PostToolUse: [["Bash", "audit", 5]]
   });
   assert.deepEqual(hookTable(read(`${P}/hooks/cursor-hooks.json`), "cursor"), {
-    sessionStart: [null, "session-start", 10],
-    beforeShellExecution: [null, "guard", 5],
-    afterShellExecution: [null, "audit", 5]
+    sessionStart: [[null, "session-start", 10]],
+    beforeShellExecution: [[null, "guard", 5]],
+    afterShellExecution: [[null, "audit", 5]]
   });
 });
 

@@ -1,5 +1,5 @@
 {
-  "description": "Passport guard before each shell command, audit after it, and a one-time background install of the Passport CLI. Each hook is a silent no-op until the CLI is installed.",
+  "description": "Passport guard before each shell command, audit after it, late-approval notices at session start and on each prompt, and a one-time background install of the Passport CLI. Each hook is a silent no-op until the CLI is installed.",
   "hooks": {
     "SessionStart": [
       {
@@ -8,6 +8,22 @@
             "type": "command",
             "command": "sh \"${CLAUDE_PLUGIN_ROOT}/scripts/passport-hook.sh\" session-start claude-code",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/scripts/passport-hook.sh\" audit claude-code",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/scripts/passport-hook.sh\" audit claude-code",
+            "timeout": 5
           }
         ]
       }

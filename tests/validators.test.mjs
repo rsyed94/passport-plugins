@@ -49,7 +49,7 @@ test("claude plugin validate --strict: plugin and marketplace", { skip: !has("cl
   }
 });
 
-test("claude: installs from the local marketplace with 4 hooks, 1 skill, 1 MCP server", { skip: !has("claude") && "Claude Code CLI not installed" }, () => {
+test("claude: installs from the local marketplace with 5 hooks, 1 skill, 1 MCP server", { skip: !has("claude") && "Claude Code CLI not installed" }, () => {
   const box = isolated();
   try {
     assert.equal(run("claude", ["plugin", "marketplace", "add", ROOT], box.env).status, 0);
@@ -57,7 +57,7 @@ test("claude: installs from the local marketplace with 4 hooks, 1 skill, 1 MCP s
     assert.equal(install.status, 0, install.output);
     const details = run("claude", ["plugin", "details", "passport@passport-plugins"], box.env).output;
     assert.match(details, /Skills \(1\)\s+passport/);
-    assert.match(details, /Hooks \(4\)\s+SessionStart, PreToolUse, PostToolUse, PostToolUseFailure/);
+    assert.match(details, /Hooks \(5\)\s+SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, PostToolUseFailure/);
     assert.match(details, /MCP servers \(1\)\s+passport/);
   } finally {
     box.cleanup();

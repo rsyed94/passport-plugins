@@ -2,6 +2,13 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.26.0
+
+- Installs `passport-bridge@0.26.0`. Late approvals reach the agent:
+  - Approve a request after the agent stopped waiting, up to a day later, and it runs the next time the agent tries that command in that session.
+  - Claude Code hears about it at session start or on your next prompt: what was approved, by whom, and when.
+  - New hooks: `UserPromptSubmit`, plus an audit hook at `SessionStart`. A prompt checks a local marker first, so it adds about 5 ms when nothing is waiting.
+
 ## 0.25.0
 
 - Installs `passport-bridge@0.25.0`. Updates are one click, and deletes come with a backup:
