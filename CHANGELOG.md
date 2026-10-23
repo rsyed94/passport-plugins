@@ -2,6 +2,14 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.25.0
+
+- Installs `passport-bridge@0.25.0`. Updates are one click, and deletes come with a backup:
+  - `passport update` moves the CLI to the version Passport names, so **Update** on Agents works.
+  - Hands-off file deletes go to a local trash and `git reset`/`git clean` take a git snapshot first; `passport undo --local` restores them. Deletes Passport can't back up ask first.
+  - `passport request` asks your admin for access, `passport changes` lists production changes with repeats folded, and `passport sessions --project` filters to one project.
+  - `passport run` output stays byte-exact when piped.
+
 ## 0.24.0
 
 - Installs `passport-bridge@0.24.0`. Sessions read like work, and keys stay in Passport:
