@@ -2,6 +2,13 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.27.0
+
+- Installs `passport-bridge@0.27.0`. The Rules page's "Not checked" list shrinks and says why:
+  - Assignment prefixes and `export` are neutral unless they change what runs or look like a secret, `sed` scripts are read, `awk` and `perl -pi -e` are classified, and git recognizes sibling worktrees and more forms.
+  - One-liners passed to python, node, perl, and ruby are scanned for side effects before they count as not checked.
+  - Commands Passport can't read now report what they are (inline code, a script of yours, or an unknown program), so Rules shows your scripts apart from what Passport can't read yet.
+
 ## 0.26.0
 
 - Installs `passport-bridge@0.26.0`. Late approvals reach the agent:
