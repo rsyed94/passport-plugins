@@ -2,6 +2,12 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.28.0
+
+- Installs `passport-bridge@0.28.0`. The guard follows two new Passport controls:
+  - An irreversible command (for example `rm -rf ~/` or a force push to the default branch) goes to Passport for approval, where a passkey or emailed code confirms it, instead of the agent's own prompt. If Passport can't be reached, it is blocked.
+  - When someone ends a session in Passport, the guard refuses that session's commands with the reason. It checks at most every 15 seconds and never waits longer than 300 ms.
+
 ## 0.27.0
 
 - Installs `passport-bridge@0.27.0`. The Rules page's "Not checked" list shrinks and says why:
