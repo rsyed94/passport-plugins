@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.30.0
+
+- Installs `passport-bridge@0.30.0`. The CLI says task, as Passport's Work page does: `passport tasks` lists your agents' tasks (`passport sessions` still works), and its links open Work directly. A command approved "for this task" now says so.
+
 ## 0.29.0
 
 - Installs `passport-bridge@0.29.0`. When the guard asks you about a command, its reason line now says what the command would do and ends with a short link ("More choices: …") to the same ask in Passport, where you can allow it once, always allow it, place an unknown deploy target, or Stop the agent.
