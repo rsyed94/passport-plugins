@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.30.1
+
+- Installs `passport-bridge@0.30.1`. The guard now pairs Cursor's before and after hooks for a command, so a command you approved once in Passport is recorded as run. `passport init` ends by pointing at Work, and the guard tells Passport it is on as soon as init turns it on.
+
 ## 0.30.0
 
 - Installs `passport-bridge@0.30.0`. The CLI says task, as Passport's Work page does: `passport tasks` lists your agents' tasks (`passport sessions` still works), and its links open Work directly. A command approved "for this task" now says so.
