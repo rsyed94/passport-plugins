@@ -1,6 +1,6 @@
 {
   "name": "passport-bridge",
-  "version": "0.30.1",
+  "version": "0.31.0",
   "type": "module",
   "bin": {
     "passport": "./dist/passport.js",

@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.31.0
+
+- Installs `passport-bridge@0.31.0`. Agents use the keys Passport holds even in chained commands (`cd app && railway up`), and Production uses your workspace's production key when an admin set one. When a CLI's sign-in has expired, the agent is told to run it through Passport. Repeated failures and leftover resources (preview branches, test databases) are reported. "For this task" approvals and one-deploy-at-a-time leases apply in the guard. Your repo's AGENTS.md "never run" lines can become rules, and Claude Code gets a short brief at session start.
+
 ## 0.30.1
 
 - Installs `passport-bridge@0.30.1`. The guard now pairs Cursor's before and after hooks for a command, so a command you approved once in Passport is recorded as run. `passport init` ends by pointing at Work, and the guard tells Passport it is on as soon as init turns it on.
