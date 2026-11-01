@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.32.1
+
+- Installs `passport-bridge@0.32.1`. Every command Passport records links to the real thing: the GitHub pull request or Actions run, the Railway or Vercel deployment, the Supabase project or function, and more. Only vendor URLs on a strict allowlist leave your computer. The guard also starts faster, loading feature code only when a command needs it.
+
 ## 0.31.1
 
 - Installs `passport-bridge@0.31.1`. A task now follows the branch its agent pushed, even when the agent works from another worktree, so its title and pull request stay current. `passport status` says how many commands Passport couldn't check, with a link to them in Work.
