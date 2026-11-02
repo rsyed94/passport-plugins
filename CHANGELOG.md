@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.33.0
+
+- Installs `passport-bridge@0.33.0`. Passport never destroys Production: commands that delete or reset Production resources are blocked across eight vendors, whatever other rules allow. Cleaning up scratch and build folders no longer asks. New users get a clear first run from `passport init`, and your team's recommended rules apply out of the box.
+
 ## 0.32.1
 
 - Installs `passport-bridge@0.32.1`. Every command Passport records links to the real thing: the GitHub pull request or Actions run, the Railway or Vercel deployment, the Supabase project or function, and more. Only vendor URLs on a strict allowlist leave your computer. The guard also starts faster, loading feature code only when a command needs it.
