@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.47.0
+
+- Installs `passport-bridge@0.47.0`. The guard is hardened: each agent gets its own hook adapter, and the guard fails closed when it can’t reach a decision. People and Agents show how hard each guard is. Offline Block rules ship off until your workspace’s CLI signing key is set up.
+
 ## 0.46.1
 
 - Installs `passport-bridge@0.46.1`. An old `passport git-credential` setup no longer blocks `git push`: the retired helper removes its own git config the first time git asks, and never answers with an empty credential, so `gh` and your other helpers sign you in again.
