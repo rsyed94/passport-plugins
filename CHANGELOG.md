@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.48.0
+
+- Installs `passport-bridge@0.48.0`. GitHub decisions now run on the connector kit, with GitHub’s full API catalog generated from its spec, so far more GitHub actions are named instead of unclassified. `curl`, `wget` and `httpie` calls to GitHub’s API are decided as the API request they send. Larger GitHub rule copies (up to 4,096 keys) load offline.
+
 ## 0.47.0
 
 - Installs `passport-bridge@0.47.0`. The guard is hardened: each agent gets its own hook adapter, and the guard fails closed when it can’t reach a decision. People and Agents show how hard each guard is. Offline Block rules ship off until your workspace’s CLI signing key is set up.
