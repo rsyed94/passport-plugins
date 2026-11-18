@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.46.1
+
+- Installs `passport-bridge@0.46.1`. An old `passport git-credential` setup no longer blocks `git push`: the retired helper removes its own git config the first time git asks, and never answers with an empty credential, so `gh` and your other helpers sign you in again.
+
 ## 0.46.0
 
 - Installs `passport-bridge@0.46.0`, the first plugin release since 0.33.0, so it brings every CLI change from 0.34.0 to 0.46.0. New in 0.46.0: commands Passport can’t classify get their own kind instead of a guess, more GitHub writes are named (so rules and Activity say exactly what happened), and the endpoint each GitHub call reached is recorded.
