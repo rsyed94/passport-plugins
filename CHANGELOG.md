@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.46.0
+
+- Installs `passport-bridge@0.46.0`, the first plugin release since 0.33.0, so it brings every CLI change from 0.34.0 to 0.46.0. New in 0.46.0: commands Passport can’t classify get their own kind instead of a guess, more GitHub writes are named (so rules and Activity say exactly what happened), and the endpoint each GitHub call reached is recorded.
+
 ## 0.33.0
 
 - Installs `passport-bridge@0.33.0`. Passport never destroys Production: commands that delete or reset Production resources are blocked across eight vendors, whatever other rules allow. Cleaning up scratch and build folders no longer asks. New users get a clear first run from `passport init`, and your team's recommended rules apply out of the box.
