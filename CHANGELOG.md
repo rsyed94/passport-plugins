@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.48.1
+
+- Installs `passport-bridge@0.48.1`. In Cursor, the guard no longer blocks every shell command: when Passport has nothing to decide, it now answers allow instead of staying silent.
+
 ## 0.48.0
 
 - Installs `passport-bridge@0.48.0`. GitHub decisions now run on the connector kit, with GitHub’s full API catalog generated from its spec, so far more GitHub actions are named instead of unclassified. `curl`, `wget` and `httpie` calls to GitHub’s API are decided as the API request they send. Larger GitHub rule copies (up to 4,096 keys) load offline.
