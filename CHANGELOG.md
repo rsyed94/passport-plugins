@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.48.2
+
+- Installs `passport-bridge@0.48.2`. `gh api` calls are decided on your computer, and GraphQL reads no longer wait on Passport. The guard finds the repository from inside a git worktree. Commands Passport doesn’t recognize get clearer effects, and Activity shows each command (with secrets masked).
+
 ## 0.48.1
 
 - Installs `passport-bridge@0.48.1`. In Cursor, the guard no longer blocks every shell command: when Passport has nothing to decide, it now answers allow instead of staying silent.
