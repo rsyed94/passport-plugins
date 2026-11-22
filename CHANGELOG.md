@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.49.0
+
+- Installs `passport-bridge@0.49.0`. The guard now recognizes Cloudflare `wrangler`, Kubernetes `kubectl` and `helm`, Terraform and OpenTofu, `npm` registry commands, and `sentry-cli`, so Activity names what they do and your rules can allow or block them.
+
 ## 0.48.2
 
 - Installs `passport-bridge@0.48.2`. `gh api` calls are decided on your computer, and GraphQL reads no longer wait on Passport. The guard finds the repository from inside a git worktree. Commands Passport doesn’t recognize get clearer effects, and Activity shows each command (with secrets masked).
