@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.50.0
+
+- Installs `passport-bridge@0.50.0`. Pushes and merges your agents make now link to what GitHub reports, so Activity shows them as decided by Passport instead of outside: `git push -u origin HEAD`, branch deletes, tags, and `gh pr merge` with or without a number. The guard is also faster for non-GitHub commands.
+
 ## 0.49.0
 
 - Installs `passport-bridge@0.49.0`. The guard now recognizes Cloudflare `wrangler`, Kubernetes `kubectl` and `helm`, Terraform and OpenTofu, `npm` registry commands, and `sentry-cli`, so Activity names what they do and your rules can allow or block them.
