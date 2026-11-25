@@ -164,8 +164,9 @@ test("the skill is short, named for its folder, and has a description", () => {
   assert.equal(front[1], "passport");
   assert.ok(front[2].length > 40 && front[2].length < 1024);
   assert.ok(text.split("\n").length <= 60, "under ~60 lines");
-  assert.match(text, /passport wait <id>/);
-  assert.match(text, /passport rules test/);
+  // Hook-first (passport-bridge 0.51.0): commands run as typed; no `passport exec` or removed commands.
+  assert.match(text, /passport hook guard/);
+  assert.doesNotMatch(text, /passport (?:exec|wait|rules test|keys|git-credential|undo|env)\b/);
 });
 
 test("nothing in the repo carries a token or credential-shaped value", () => {

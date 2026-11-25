@@ -1,48 +1,37 @@
 ---
 name: passport
-description: How to work when Passport governs this agent. Use before touching production or shared systems (deploys, databases, cloud consoles, payment or email apps), before running vendor CLIs (railway, gh, vercel, wrangler, supabase, stripe, aws, neonctl, flyctl), when one of those CLIs says it isn't logged in, when a command or tool returns a Passport message such as "Waiting for approval" or "Blocked by Passport", or when unsure whether an action is allowed.
+description: How to work when Passport governs this agent. Use before touching production or shared systems (deploys, databases, cloud consoles), before running vendor CLIs (gh, git push, railway, supabase, wrangler, kubectl, terraform, npm publish), when a command returns a Passport message such as "Blocked by your company's Passport policy", or when unsure whether an action is allowed.
 ---
 
 # Working with Passport
 
-Passport holds the credentials for this person's work apps and decides, from their rules, what you may do. Most actions run without a prompt. Some ask a person first, and some are blocked.
+Passport decides, from your company's rules, whether each consequential action may run, and records it. Commands run with this person's own sign-in: Passport never hands you a credential. Most actions are allowed; some are blocked.
+
+## How commands are decided
+
+- Passport's hook checks each shell command before it runs. Run CLIs as you normally would (`gh pr merge 12`, `git push`, `railway up`); there is no wrapper to use.
+- A blocked command is refused before it runs, with Passport's reason. Nothing ran.
+- Don't hide a command from the check (a script, `sh -c`, an alias, another CLI or a raw API call) to get around a block.
 
 ## Production goes through Passport
 
-- Use the Passport tools (the `passport` MCP server) for work apps such as Railway, Vercel, Supabase, GitHub, and Stripe, rather than pasting credentials or calling their APIs with keys you found.
-- To debug production, start with `prod_overview`, then `prod_logs`, `prod_errors`, `prod_deploys`, `prod_metrics`, or `prod_query` (read-only SQL). They work the same across Railway, Vercel, Supabase, Neon, and Sentry.
-- Never paste, print, or write API keys, tokens, or passwords into commands, files, prompts, or commit messages. If something needs a key you don't have, say so and ask the person to connect the app in Passport.
+- Use the Passport tools (the `passport` MCP server) for work apps such as GitHub, Railway and Supabase rather than calling their APIs with keys you found.
+- To debug production, start with `prod_overview`, then `prod_logs`, `prod_deploys`, `prod_metrics` or `prod_query` (read-only SQL).
+- Never paste, print or write API keys, tokens or passwords into commands, files, prompts or commit messages. If something needs access you don't have, say so and ask the person, or use `passport request <app>`.
 - An environment Passport can't place counts as Production.
-
-## Vendor CLIs: use `passport exec`
-
-Passport can hold the keys for some CLIs. A key moved into Passport is no longer on this computer, so the CLI on its own says "not logged in". Run those CLIs through Passport:
-
-    passport exec -- railway up -e staging
-    passport exec -- gh pr create --fill
-
-- Everything after `--` is the CLI's own command, unchanged. The output and exit code are the CLI's.
-- In Claude Code, Passport rewrites these commands for you, so you may see `passport exec` in the command that ran. Leave it.
-- Don't wrap it or work around it: `sh -c`, `env`, `printenv`, `railway run`, `gh auth token`, `aws configure`, and paths like `./railway` are refused. Never print, copy, or save a key.
 
 ## When Passport answers
 
 - **Ran**: carry on.
-- **Asked** (an approval prompt in this session): wait for the person's answer. Don't retry with a different command to get around it.
-- **Waiting for approval** (exit 4, for example `Waiting for approval from Maya. Run passport wait <id>`): run `passport wait <id>` (up to 100 seconds; exit 0 means approved), then run the same command again with the same arguments. Or keep going on work that doesn't depend on it and come back later. Don't retry in a loop.
-- **Declined** (exit 5, `Declined by <name>: <note>`): stop that action. Read the person's note and follow it.
-- **Blocked** (exit 5, for example `Blocked by Passport: Team rule, no deletes in Production.`): don't try another route (a script, alias, other CLI, or raw API call). Tell the person what was blocked and why, and suggest they run it themselves or request an exception in Passport.
-- **No key** (exit 3, `No <app> key in Passport…` or `Your <app> key in Passport stopped working.`): tell the person. They fix it in Passport → Apps, or with `passport keys move` on their computer.
-- **Unreachable** (exit 1, `Passport couldn't be reached`): nothing ran. Try again later. Never look for a key on disk instead.
-- **Expired**: the approval timed out. Ask again only if the work still needs it.
+- **Blocked** (`Blocked by your company's Passport policy: <action> on <resource> (rule: <rule>)…`): don't retry or try another route. Tell the person what you were trying to do; they can see why at the link in the message.
+- **Unreachable** (`Passport couldn't be reached`): what a cached Block rule covers is refused; anything else runs and is recorded once Passport is back. Never look for a key on disk instead.
+- **A vendor CLI says it isn't logged in**: ask the person to sign in to that CLI, then retry.
 
 ## When unsure
 
-- Run `passport rules test "<command>"` to see what Passport would decide and why, before running anything that changes or deletes production data.
-- `passport status` shows the current rules and whether this computer is signed in.
-- `passport env` shows where this folder's commands go (Production, Staging, or Development) and how Passport knows.
-- Passport backs up many deletes first. If one went wrong, tell the person; `passport undo --last` (or the `passport_undo` tool) restores it, and asks first in Production.
-- Read-only checks (`--help`, `--dry-run`, listing, logs) never ask.
+- `passport status` shows whether this computer is signed in and the hook is on.
+- `passport doctor` explains a failing setup.
+- Read-only checks (`--help`, `--dry-run`, listing, logs) are never blocked.
 
 ## If `passport` isn't found
 
@@ -51,6 +40,4 @@ Passport can hold the keys for some CLIs. A key moved into Passport is no longer
 
 ## Cloud and CI
 
-With `PASSPORT_AGENT_KEY` and `PASSPORT_ENDPOINT` set, the same commands work. Approvals go to the person who owns the agent.
-
-Codex note: Codex can't show Passport's approval prompt, so Passport records and blocks there, and Codex's own approvals apply to the rest.
+With no hook, a script asks Passport by piping the hook's own JSON to `passport hook guard` before a command and to `passport hook` after it. With `PASSPORT_AGENT_KEY` and `PASSPORT_ENDPOINT` set, decisions are the agent's, under its owner's rules.
