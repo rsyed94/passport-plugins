@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.51.0
+
+- Installs `passport-bridge@0.51.0`. The guard decides every command itself, so `passport exec` and the commands it relied on are gone. After an upgrade, the guard watches newly supported platforms at once instead of within the hour. Wrapped commands are decided like typed ones, production secret reads and port-forwards show in Activity, and failed calls read Failed. Terraform saved plans, Kubernetes, Sentry and npm commands are named more precisely, and `psql` to Supabase hosts is tied to Supabase.
+
 ## 0.50.0
 
 - Installs `passport-bridge@0.50.0`. Pushes and merges your agents make now link to what GitHub reports, so Activity shows them as decided by Passport instead of outside: `git push -u origin HEAD`, branch deletes, tags, and `gh pr merge` with or without a number. The guard is also faster for non-GitHub commands.
