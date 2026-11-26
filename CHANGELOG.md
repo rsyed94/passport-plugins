@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.52.0
+
+- Installs `passport-bridge@0.52.0`. Commands that only mention a platform’s CLI by name, like `ls supabase`, `grep -rn supabase .`, `git grep railway` or `find . -name wrangler`, are no longer shown as commands Passport can’t name. Activity stays focused on what your agents actually run.
+
 ## 0.51.0
 
 - Installs `passport-bridge@0.51.0`. The guard decides every command itself, so `passport exec` and the commands it relied on are gone. After an upgrade, the guard watches newly supported platforms at once instead of within the hour. Wrapped commands are decided like typed ones, production secret reads and port-forwards show in Activity, and failed calls read Failed. Terraform saved plans, Kubernetes, Sentry and npm commands are named more precisely, and `psql` to Supabase hosts is tied to Supabase.
