@@ -2,6 +2,10 @@
 
 The plugin version always equals the `passport-bridge` version it installs.
 
+## 0.53.0
+
+- Installs `passport-bridge@0.53.0`. The guard now sees platform CLIs run through package runners, like `npx wrangler`, `bunx supabase`, `pnpm exec terraform` or `yarn dlx`, and decides them like the CLI typed directly, so Activity names them and your rules apply.
+
 ## 0.52.0
 
 - Installs `passport-bridge@0.52.0`. Commands that only mention a platform’s CLI by name, like `ls supabase`, `grep -rn supabase .`, `git grep railway` or `find . -name wrangler`, are no longer shown as commands Passport can’t name. Activity stays focused on what your agents actually run.
