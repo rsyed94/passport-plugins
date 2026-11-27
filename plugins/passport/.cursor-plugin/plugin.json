@@ -9,6 +9,7 @@
   "homepage": "https://passportmcp.com/connect/cursor",
   "repository": "https://github.com/rsyed94/passport-plugins",
   "license": "MIT",
+  "logo": "assets/icon.png",
   "keywords": [
     "passport",
     "governance",
