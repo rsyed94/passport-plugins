@@ -148,6 +148,36 @@ test("every path a manifest names exists inside the plugin", () => {
   assert.ok(statSync(join(PLUGIN, "scripts", "passport-hook.sh")).mode & 0o111, "hook script is executable");
 });
 
+// The Claude plugin directory wants a square PNG or JPEG, 512 to 2048 px, under
+// 2 MB (`claude plugin validate --strict`, ICON_MISSING). One file serves every client.
+test("every icon a manifest names is one square PNG the plugin directory accepts", () => {
+  const claude = read(`${P}/.claude-plugin/plugin.json`);
+  const cursor = read(`${P}/.cursor-plugin/plugin.json`);
+  const codex = read(`${P}/.codex-plugin/plugin.json`).interface;
+  const paths = [claude.icon, cursor.logo, codex.composerIcon, codex.logo];
+  assert.deepEqual(
+    paths.map((path) => path.replace(/^\.\//, "")),
+    Array(paths.length).fill("assets/icon.png")
+  );
+  const file = join(PLUGIN, "assets", "icon.png");
+  const png = readFileSync(file);
+  assert.equal(png.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", "PNG signature");
+  const width = png.readUInt32BE(16);
+  const height = png.readUInt32BE(20);
+  assert.equal(width, height, "square");
+  assert.ok(width >= 512 && width <= 2048, `${width} px`);
+  assert.ok(statSync(file).size < 2 * 1024 * 1024, "under 2 MB");
+});
+
+test("the Claude plugin names its privacy policy and terms (plugin directory checks)", () => {
+  const claude = read(`${P}/.claude-plugin/plugin.json`);
+  const codex = read(`${P}/.codex-plugin/plugin.json`).interface;
+  assert.equal(claude.privacyPolicyUrl, "https://passportmcp.com/privacy");
+  assert.equal(claude.termsOfServiceUrl, "https://passportmcp.com/terms");
+  assert.equal(codex.privacyPolicyURL, claude.privacyPolicyUrl);
+  assert.equal(codex.termsOfServiceURL, claude.termsOfServiceUrl);
+});
+
 test("no top-level bin/ anywhere (claude.ai organization sync rejects it)", () => {
   assert.equal(existsSync(join(ROOT, "bin")), false);
   assert.equal(existsSync(join(PLUGIN, "bin")), false);

@@ -10,6 +10,9 @@
   "homepage": "https://passportmcp.com/connect/claude-code",
   "repository": "https://github.com/rsyed94/passport-plugins",
   "license": "MIT",
+  "icon": "./assets/icon.png",
+  "privacyPolicyUrl": "https://passportmcp.com/privacy",
+  "termsOfServiceUrl": "https://passportmcp.com/terms",
   "keywords": [
     "passport",
     "governance",

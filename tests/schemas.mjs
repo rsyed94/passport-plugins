@@ -63,6 +63,11 @@ export const claudePlugin = {
     homepage: { type: "string", format: "uri" },
     repository: { type: "string" },
     license: { type: "string" },
+    icon: { type: "string", pattern: relative },
+    documentationUrl: { type: "string", pattern: "^https://" },
+    supportUrl: { type: "string", pattern: "^https://" },
+    privacyPolicyUrl: { type: "string", pattern: "^https://" },
+    termsOfServiceUrl: { type: "string", pattern: "^https://" },
     keywords: strings
   },
   additionalProperties: false

@@ -28,6 +28,8 @@
     "websiteURL": "https://passportmcp.com",
     "privacyPolicyURL": "https://passportmcp.com/privacy",
     "termsOfServiceURL": "https://passportmcp.com/terms",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
     "defaultPrompt": [
       "Check what Passport would decide for railway redeploy in production."
     ]
